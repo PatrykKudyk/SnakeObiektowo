@@ -11,22 +11,16 @@ Game::~Game()
 {
 }
 
+void Game::inicialization()
+{
+}
+
 void Game::mainGameLoop()
 {
 	do
 	{
 		
-	} while ();
-}
-
-int Game::getHeight()
-{
-	return height;
-}
-
-int Game::getWidth()
-{
-	return width;
+	} while (true);
 }
 
 char Game::getType()
@@ -34,17 +28,19 @@ char Game::getType()
 	return type;
 }
 
-void Game::setHeight(int data)
-{
-	height = data;
-}
-
-void Game::setWidth(int data)
-{
-	width = data;
-}
-
 void Game::setType(char data)
 {
 	type = data;
+}
+
+Board Game::getBoard()
+{
+	return board;
+}
+
+void Game::setBoard(int height, int width)
+{
+	board.setHeight(height);
+	board.setWidth(width);
+	board.inicialiseBoard();
 }

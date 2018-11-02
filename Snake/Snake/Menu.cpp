@@ -14,36 +14,81 @@ Menu::~Menu()
 
 void Menu::mainMenu()
 {
+	bool quit = true;
+	Game game;
 	greetings();
-	system("cls");
-	int choise = menuChoise();
-	switch(choise)
-	{
-	case 1:
-
-		break;
-	case 2:
-		break;
-	case 3:
-		break;
-	case 4:
-		break;
-	default:
-		break;
-	}
+	do {
+		system("cls");
+		int choise = menuChoise();
+		switch (choise)
+		{
+		case 1:
+			mapChoise(game);
+			game.inicialization();
+			break;
+		case 2:
+			instruction();
+			break;
+		case 3:
+			highScoresDisplay();
+			break;
+		case 4:
+			quit = false;
+			break;
+		default:
+			break;
+		}
+	} while (quit);
 }
 
 void Menu::greetings()
 {
 	cout << "\t\t\tWitaj w grze SNAKE!" << endl << endl
-		<< "Juz za sekunde bedziesz mogl zagrac w SNAKE'a" << endl;
+		<< "\tJuz za sekunde bedziesz mogl zagrac w SNAKE'a" << endl;
 	cin.get();
 	cin.get();
 }
 
 void Menu::mapChoise(Game &game)
 {
+	int choise;
+	choise = mapSizeChoise();
+	switch(choise)
+	{
+	case 1:
+		game.setBoard(25, 15);
+		break;
+	case 2:
+		game.setBoard(30, 20);
+		break;
+	case 3:
+		game.setBoard(35, 25);
+		break;
+	default:
+		break;
+	}
+	choise = mapTypeChoise();
+	switch(choise)
+	{
+	case 1:
+		game.setType('n');
+		break;
+	case 2:
+		game.setType('w');
+		break;
+	default:
+		break;
+	}
+}
 
+void Menu::instruction()
+{
+	cout << "\t\t\tInstrukcja\n\n";
+}
+
+void Menu::highScoresDisplay()
+{
+	cout << "\t\t\tTabela Wynikow" << endl;
 }
 
 int Menu::menuChoise()

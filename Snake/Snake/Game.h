@@ -1,18 +1,19 @@
 #pragma once
+#include "Board.h"
+
 class Game
 {
-	int height;
-	int width;
+	
 	char type;
+	Board board;
 public:
 	Game();
 	~Game();
+	void inicialization();
 	void mainGameLoop();
-	int getHeight();
-	int getWidth();
 	char getType();
-	void setHeight(int data);
-	void setWidth(int data);
 	void setType(char data);
+	Board getBoard();
+	void setBoard(int height, int width);
 };
 
