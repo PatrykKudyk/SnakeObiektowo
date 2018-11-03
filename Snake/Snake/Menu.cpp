@@ -24,6 +24,7 @@ void Menu::mainMenu()
 		{
 		case 1:
 			mapChoise(game);
+			system("cls");
 			game.inicialization();
 			break;
 		case 2:
@@ -46,23 +47,23 @@ void Menu::greetings()
 	cout << "\t\t\tWitaj w grze SNAKE!" << endl << endl
 		<< "\tJuz za sekunde bedziesz mogl zagrac w SNAKE'a" << endl;
 	cin.get();
-	cin.get();
 }
 
 void Menu::mapChoise(Game &game)
 {
 	int choise;
+	system("cls");
 	choise = mapSizeChoise();
 	switch(choise)
 	{
 	case 1:
-		game.setBoard(25, 15);
+		game.setBoard(15, 25);
 		break;
 	case 2:
-		game.setBoard(30, 20);
+		game.setBoard(20, 35);
 		break;
 	case 3:
-		game.setBoard(35, 25);
+		game.setBoard(25, 45);
 		break;
 	default:
 		break;
@@ -71,10 +72,10 @@ void Menu::mapChoise(Game &game)
 	switch(choise)
 	{
 	case 1:
-		game.setType('n');
+		game.setBoardType(0);
 		break;
 	case 2:
-		game.setType('w');
+		game.setBoardType(1);
 		break;
 	default:
 		break;
@@ -109,8 +110,8 @@ int Menu::mapSizeChoise()
 	int number;
 	cout << "Wybierz rozmiar mapy na jakim chcialbys grac:" << endl
 		<< "[1] 15x25" << endl
-		<< "[2] 20x30" << endl
-		<< "[3] 25x35" << endl;
+		<< "[2] 20x35" << endl
+		<< "[3] 25x45" << endl;
 	cin >> number;
 	return number;
 }
