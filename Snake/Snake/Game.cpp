@@ -3,6 +3,8 @@
 #include <iostream>
 #include <windows.h>
 #include "NormalFood.h"
+#include "BiggerFood.h"
+#include "PoisonedFood.h"
 
 using namespace std;
 
@@ -27,7 +29,10 @@ void Game::mainGameLoop(char startDirection)
 	char direction = startDirection;
 	char tempChar = 0;
 	bool game = true;
+	int counter = 0;
 	NormalFood normal;
+	BiggerFood bigger;
+	PoisonedFood poisoned;
 	generateFoodCords(normal);
 	do {
 		system("cls");
@@ -42,25 +47,50 @@ void Game::mainGameLoop(char startDirection)
 			if (quit) break;
 		} while (_kbhit() != false);
 		board.clearingBoard();
+		if (bigger.getCounter() % 50 == 0)
+			generateFoodCords(bigger);
+		if (poisoned.getCounter() % 65 == 0)
+			generateFoodCords(poisoned);
+			
+		foodBoardPlacing(bigger);
 		foodBoardPlacing(normal);
+		foodBoardPlacing(poisoned);
 		snakeBodyReplacing();
 		headMove(direction);
 		if (board.getBoard()[snake.front().getY()][snake.front().getX()] != 32 || direction == 27 || selfEating())
-			if(snake.front().getX() != normal.getX() && snake.front().getY() != normal.getY())
+			if(!foodEating(normal, bigger, poisoned))
 				game = false;
 		if(snake.front().getX() == normal.getX() && snake.front().getY() == normal.getY())
 		{
+			normal.eatingFood(snake,points);
 			generateFoodCords(normal);
-			snake.push_back(Snake(snake.back().getX(),snake.back().getY()));
-			points += 10;
 		}
+
+		if (snake.front().getX() == bigger.getX() && snake.front().getY() == bigger.getY())
+		{
+			bigger.eatingFood(snake, points);
+			generateFoodCords(bigger);
+			bigger.setCounter(1);
+		}
+
+		if (snake.front().getX() == poisoned.getX() && snake.front().getY() == poisoned.getY())
+		{
+			poisoned.eatingFood(snake, points);
+			generateFoodCords(poisoned);
+			poisoned.setCounter(1);
+		}
+
 		snakeBoardMove();
 		board.displayBoard();	
 		
+		if (snake.size() == 1)
+			game = false;
 
 		cout << "\nPunkty: " << points << endl;
 		cout << "Wielkosc wieza: " << snake.size() << endl;
-		Sleep(120);
+		Sleep(gameSpeed);
+		bigger.setCounter(bigger.getCounter() + 1);
+		poisoned.setCounter(poisoned.getCounter() + 1);
 	} while (game);
 	system("cls");
 	gameEnd();
@@ -133,13 +163,13 @@ void Game::snakeBoardMove()
 	for(int i = snake.size() - 1; i >= 0; i--)
 	{
 		if (i == 0)
-			board.setBoardPoint(snake.front().getX(), snake.front().getY(), 254);
+			board.setBoardPoint(snake.front().getX(), snake.front().getY(), 'O');
 		else
 			board.setBoardPoint(snake[i].getX(), snake[i].getY(), 'o');
 	}
 }
 
-void Game::generateFoodCords(NormalFood& food)
+void Game::generateFoodCords(Food& food)
 {
 	int x, y;
 	do
@@ -151,9 +181,14 @@ void Game::generateFoodCords(NormalFood& food)
 	food.setX(x);
 }
 
-void Game::foodBoardPlacing(NormalFood& food)
+void Game::foodBoardPlacing(Food& food)
 {
-	board.setBoardPoint(food.getX(), food.getY(), 224);
+	if (food.getType() == 'n')
+		board.setBoardPoint(food.getX(), food.getY(), 224);
+	if (food.getType() == 'b')
+		board.setBoardPoint(food.getX(), food.getY(), 153);
+	if (food.getType() == 'p')
+		board.setBoardPoint(food.getX(), food.getY(), 207);
 }
 
 void Game::gameEnd()
@@ -171,6 +206,17 @@ bool Game::selfEating()
 	for (int i = 1; i < snake.size(); i++)
 		if (snake.front().getX() == snake[i].getX() && snake.front().getY() == snake[i].getY())
 			return true;
+	return false;
+}
+
+bool Game::foodEating(Food food1, Food food2, Food food3)
+{
+	if (snake.front().getX() == food1.getX() && snake.front().getY() == food1.getY())
+		return true;
+	if (snake.front().getX() == food2.getX() && snake.front().getY() == food2.getY())
+		return true;
+	if (snake.front().getX() == food3.getX() && snake.front().getY() == food3.getY())
+		return true;
 	return false;
 }
 
@@ -195,6 +241,11 @@ int Game::getPoints()
 	return points;
 }
 
+int Game::getGameSpeed()
+{
+	return gameSpeed;
+}
+
 void Game::setBoard(int height, int width)
 {
 	board.setHeight(height);
@@ -209,4 +260,9 @@ void Game::setPoints(int data)
 void Game::setBoardType(int data)
 {
 	board.setType(data);
+}
+
+void Game::setGameSpeed(int data)
+{
+	gameSpeed = data;
 }

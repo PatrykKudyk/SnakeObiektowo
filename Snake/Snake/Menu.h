@@ -9,6 +9,7 @@ public:
 	void mainMenu();
 	void greetings();
 	void mapChoise(Game &game);
+	void difficultyChoise(Game &game);
 	void instruction();
 	void highScoresDisplay();
 	int menuChoise();

@@ -36,6 +36,12 @@
     <ClCompile Include="NormalFood.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="BiggerFood.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PoisonedFood.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Menu.h">
@@ -54,6 +60,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="NormalFood.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BiggerFood.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PoisonedFood.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

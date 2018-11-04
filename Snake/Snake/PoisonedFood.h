@@ -1,14 +1,17 @@
 #pragma once
 #include "Food.h"
-#include <vector>
 #include "Snake.h"
+#include <vector>
 
-class NormalFood :
+class PoisonedFood :
 	public Food
 {
+	int counter;
 public:
-	NormalFood();
-	~NormalFood();
+	PoisonedFood();
+	~PoisonedFood();
 	void eatingFood(std::vector<Snake> &snake, int &points);
+	int getCounter();
+	void setCounter(int data);
 };
 

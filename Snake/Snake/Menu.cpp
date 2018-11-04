@@ -25,6 +25,8 @@ void Menu::mainMenu()
 		case 1:
 			mapChoise(game);
 			system("cls");
+			difficultyChoise(game);
+			system("cls");
 			game.inicialization();
 			break;
 		case 2:
@@ -79,6 +81,35 @@ void Menu::mapChoise(Game &game)
 		game.setBoardType(1);
 		break;
 	default:
+		break;
+	}
+}
+
+void Menu::difficultyChoise(Game& game)
+{
+	int number;
+	cout << "Wybierz poziom trudnosci na jakim chcialbys grac:" << endl
+		<< "[1] latwy" << endl
+		<< "[2] sredni" << endl
+		<< "[3] trudny" << endl
+		<< "[4] bardzo trudny" << endl;
+	cin >> number;
+	switch(number)
+	{
+	case 1:
+		game.setGameSpeed(120);
+		break;
+	case 2:
+		game.setGameSpeed(90);
+		break;
+	case 3:
+		game.setGameSpeed(60);
+		break;
+	case 4:
+		game.setGameSpeed(30);
+		break;
+	default:
+		game.setGameSpeed(120);
 		break;
 	}
 }
