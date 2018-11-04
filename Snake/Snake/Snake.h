@@ -11,5 +11,9 @@ public:
 	int getY();
 	void setX(int data);
 	void setY(int data);
+	void moveUp();
+	void moveDown();
+	void moveLeft();
+	void moveRight();
 };
 

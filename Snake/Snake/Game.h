@@ -2,6 +2,7 @@
 #include "Board.h"
 #include "Snake.h"
 #include <vector>
+#include "NormalFood.h"
 
 class Game
 {
@@ -17,6 +18,12 @@ public:
 	void headMove(char direction);
 	void directionChanger(char &dir, bool &quit, char tempDir);
 	void snakeBoardMove();
+	void generateFoodCords(NormalFood &food);
+	void foodBoardPlacing(NormalFood &food);
+	void gameEnd();
+	bool selfEating();
+	int generateX();
+	int generateY();
 	Board getBoard();
 	int getPoints();
 	void setBoard(int height, int width);

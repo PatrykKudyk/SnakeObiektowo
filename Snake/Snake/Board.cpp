@@ -67,7 +67,7 @@ void Board::clearingBoard()
 						board[i][j] = 219;
 					else board[i][j] = 32;
 				}
-				else if (j == width / 2)
+				else if (j == 6)
 				{
 					if (i >= height / 2 && i <= (height / 2) + 4)
 						board[i][j] = 219;

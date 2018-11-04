@@ -36,3 +36,23 @@ void Snake::setY(int data)
 {
 	y = data;
 }
+
+void Snake::moveUp()
+{
+	y -= 1;
+}
+
+void Snake::moveDown()
+{
+	y += 1;
+}
+
+void Snake::moveLeft()
+{
+	x -= 1;
+}
+
+void Snake::moveRight()
+{
+	x += 1;
+}

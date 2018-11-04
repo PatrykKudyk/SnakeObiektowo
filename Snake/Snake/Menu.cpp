@@ -45,7 +45,8 @@ void Menu::mainMenu()
 void Menu::greetings()
 {
 	cout << "\t\t\tWitaj w grze SNAKE!" << endl << endl
-		<< "\tJuz za sekunde bedziesz mogl zagrac w SNAKE'a" << endl;
+		<< "\tJuz za sekunde bedziesz mogl zagrac w SNAKE'a" << endl << endl
+		<< "\tWcisnij [Enter]" << endl;
 	cin.get();
 }
 
@@ -96,11 +97,13 @@ int Menu::menuChoise()
 {
 	int number;
 	cout << "\t\t\t\t\tSNAKE" << endl << endl
-		<< "Co chcialbys teraz zrobic?" << endl
+		<< "\tCo chcialbys teraz zrobic?" << endl
 		<< "[1] Zagrac w gre." << endl
 		<< "[2] Przeczytac instrukcje." << endl
 		<< "[3] Zobaczyc tabele z najwyzszymi wynikami." << endl
-		<< "[4] Wyjsc z gry." << endl;;
+		<< "[4] Wyjsc z gry." << endl << endl
+		<< "Wyboru dokonaj poprzez wprowadzenie odpowiedniej cyfry oraz zatwierdz" << endl
+		<< "przyciskiem [Enter]" << endl;
 	cin >> number;
 	return number;
 }
