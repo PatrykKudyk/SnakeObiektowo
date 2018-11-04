@@ -96,8 +96,7 @@ void Game::mainGameLoop(char startDirection)
 		poisoned.setCounter(poisoned.getCounter() + 1);
 	} while (game);
 	system("cls");
-	//points = points*snake.size()*(gameSpeed / 10);
-	points = 90020;
+	points = points*snake.size()*(gameSpeed / 10);
 	gameEnd();
 	system("cls");
 	if (isQualifiedToHS())
