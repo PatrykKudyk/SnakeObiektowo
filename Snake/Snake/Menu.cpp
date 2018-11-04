@@ -1,5 +1,7 @@
 #include "Menu.h"
 #include <iostream>
+#include <fstream>
+#include <string>
 
 using namespace std;
 
@@ -30,9 +32,11 @@ void Menu::mainMenu()
 			game.inicialization();
 			break;
 		case 2:
+			system("cls");
 			instruction();
 			break;
 		case 3:
+			system("cls");
 			highScoresDisplay();
 			break;
 		case 4:
@@ -47,8 +51,8 @@ void Menu::mainMenu()
 void Menu::greetings()
 {
 	cout << "\t\t\tWitaj w grze SNAKE!" << endl << endl
-		<< "\tJuz za sekunde bedziesz mogl zagrac w SNAKE'a" << endl << endl
-		<< "\tWcisnij [Enter]" << endl;
+		<< "\tJuz za sekunde bedziesz mogl zagrac w SNAKE'a" << endl;
+	pressEnter();
 	cin.get();
 }
 
@@ -116,12 +120,56 @@ void Menu::difficultyChoise(Game& game)
 
 void Menu::instruction()
 {
-	cout << "\t\t\tInstrukcja\n\n";
+	ifstream file;
+	string line;
+	file.open("Instruction.txt", ios::in);
+	if (file.good())
+	{
+		while (!file.eof())
+		{
+			getline(file, line);
+			cout << line << endl; //wyœwietlenie linii
+		}
+		file.close();
+	}
+	else
+		cout << "Niestety, ale nie udalo sie otworzyc instrukcji." << endl;
+	pressEnter();
+	cin.get();
+	cin.get();
 }
 
 void Menu::highScoresDisplay()
 {
-	cout << "\t\t\tTabela Wynikow" << endl;
+	ifstream fileNames, fileScores;
+	string line;
+	int counter = 1;
+	fileNames.open("HighScoresNames.txt", ios::in);
+	fileScores.open("HighScoresPoints.txt", ios::in);
+	if (fileNames.good() && fileScores.good())
+	{
+		cout << "\t\tTabela Najwyzszych Wynikow" << "\n\n";
+		while (!fileNames.eof())
+		{
+			getline(fileNames, line);
+			cout << counter << ". " << line << "   ";
+			getline(fileScores, line);
+			cout << line << endl;
+			counter++;
+		}
+		fileNames.close();
+		fileScores.close();
+	}
+	else
+		cout << "Niestety, ale nie udalo sie otworzyc tabeli." << endl;
+	pressEnter();
+	cin.get();
+	cin.get();
+}
+
+void Menu::pressEnter()
+{
+	cout << "\nNacisnij [Enter]\n";
 }
 
 int Menu::menuChoise()

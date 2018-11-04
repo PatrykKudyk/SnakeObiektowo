@@ -7,7 +7,7 @@
 class Game
 {
 	Board board;
-	int points;
+	unsigned long int points;
 	std::vector<Snake> snake;
 	int gameSpeed;
 public:
@@ -22,8 +22,10 @@ public:
 	void generateFoodCords(Food &food);
 	void foodBoardPlacing(Food &food);
 	void gameEnd();
+	void highScoreMenu();
 	bool selfEating();
 	bool foodEating(Food food1, Food food2, Food food3);
+	bool isQualifiedToHS();
 	int generateX();
 	int generateY();
 	Board getBoard();

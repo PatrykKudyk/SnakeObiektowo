@@ -10,7 +10,7 @@ class PoisonedFood :
 public:
 	PoisonedFood();
 	~PoisonedFood();
-	void eatingFood(std::vector<Snake> &snake, int &points);
+	void eatingFood(std::vector<Snake> &snake,unsigned long int &points);
 	int getCounter();
 	void setCounter(int data);
 };

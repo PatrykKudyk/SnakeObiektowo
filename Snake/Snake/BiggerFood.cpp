@@ -13,7 +13,7 @@ BiggerFood::~BiggerFood()
 {
 }
 
-void BiggerFood::eatingFood(std::vector<Snake>& snake, int& points)
+void BiggerFood::eatingFood(std::vector<Snake>& snake, unsigned long int& points)
 {
 	snake.push_back(Snake(snake.back().getX(), snake.back().getY()));
 	points += 30;

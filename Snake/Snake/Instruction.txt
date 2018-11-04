@@ -1,0 +1,37 @@
+		Instrukcja
+
+	Oto kilka zasad gry Snake:
+
+1) Przed rozpoczeciem gry musisz wybrac
+   odpowiedni stopien trudnosci. Im wyz-
+   szy, tym szybciej bedzie sie poruszal
+   waz. Na poczatku polecam latwy :)
+
+2) Wezem mozesz poruszac sie za pomoca 
+   strzalek.
+
+3) W grze zjada sie jedzenie. Wyrozniamy
+   3 rodzaje jedzenia: zwykle, wieksze i
+   otrute. 
+
+3.1) Zwykle - zwieksza weza o 1. Daje 10 pkt.
+3.2) Wieksze - zwieksza weza o 1. Daje 30 pkt.
+3.3) Otrute - zmniejsza weza o 1. Daje 20 pkt.
+
+4) Na koniec gry liczy sie twoja ilosc
+   punktow pomnozona przez dlugosc twojego
+   weza oraz stopien trudnosci.
+
+5) Zakonczyc gre mozesz na kilka sposobow:
+
+5.1) Naciskajac klawisz [Esc].
+5.2) Zjadajac samego siebie.
+5.3) Uderzajac w sciane badz przeszkode.
+5.4) Zmniejszajac weza do rozmiaru 1.
+
+6) Jesli wynik bedzie wystarczajaco wysoki,
+   to bedziesz mogl zapisac sie w specjal-
+   nej tabeli najwyzszych wynikow.
+
+	Wiesz juz wszystko co powinienes. 
+     Pozostaje mi tylko zyczyc ci powodzenia!

@@ -12,6 +12,7 @@ public:
 	void difficultyChoise(Game &game);
 	void instruction();
 	void highScoresDisplay();
+	void pressEnter();
 	int menuChoise();
 	int mapSizeChoise();
 	int mapTypeChoise();

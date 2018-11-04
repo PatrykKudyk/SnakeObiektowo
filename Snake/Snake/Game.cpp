@@ -5,6 +5,9 @@
 #include "NormalFood.h"
 #include "BiggerFood.h"
 #include "PoisonedFood.h"
+#include <fstream>
+#include <string>
+#include <algorithm>
 
 using namespace std;
 
@@ -93,7 +96,19 @@ void Game::mainGameLoop(char startDirection)
 		poisoned.setCounter(poisoned.getCounter() + 1);
 	} while (game);
 	system("cls");
+	//points = points*snake.size()*(gameSpeed / 10);
+	points = 90020;
 	gameEnd();
+	system("cls");
+	if (isQualifiedToHS())
+		highScoreMenu();
+	else
+	{
+		cout << "Niestety, ale nie zakwalifikowales sie do" << endl
+			<< "najwyzszych wynikow. Sprobuj jeszcze raz." << endl;
+		cin.get();
+		cin.get();
+	}
 	snake.clear();
 	points = 0;
 	board.resetBoard();
@@ -201,6 +216,62 @@ void Game::gameEnd()
 	cin.get();
 }
 
+void Game::highScoreMenu()
+{
+	fstream fileNames, fileScores;
+	string name, line;
+	do 
+	{
+		system("cls");
+		cout << "Podaj swoj nick" << endl
+			<< "(Nie moze miec wiecej niz 6 znakow!): ";
+		cin >> name;
+	} while (name.size() > 6);
+	
+	vector<string> names;
+	vector<double> pointsVec;
+	double points;
+	fileNames.open("HighScoresNames.txt", ios::in);
+	fileScores.open("HighScoresPoints.txt", ios::in);
+	if (fileNames.good() && fileScores.good())
+	{
+		while (!fileNames.eof())
+		{
+			getline(fileNames, line);
+			names.push_back(line);
+			fileScores >> points;
+			pointsVec.push_back(points);
+		}
+		fileNames.close();
+		fileScores.close();
+	}
+	pointsVec.push_back(this->points);
+	sort(pointsVec.rbegin(), pointsVec.rend());
+	int position;
+	for (int i = 0; i < pointsVec.size(); i++)
+		if (pointsVec[i] == (double)this->points)
+			position = i;
+	vector<string> tempNames;
+	for (int i = 0; i < position; i++)
+		tempNames.push_back(names[i]);
+	tempNames.push_back(name);
+	for (int i = position; i < names.size(); i++)
+		tempNames.push_back(names[i]);
+
+	fileNames.open("HighScoresNames.txt", ios::out | ios::trunc);
+	fileScores.open("HighScoresPoints.txt", ios::out | ios::trunc);
+	if (fileNames.good() && fileScores.good())
+	{
+		for (int i = 0; i < pointsVec.size() - 1; i++)
+		{
+			fileNames << tempNames[i] << endl;
+			fileScores << pointsVec[i] << endl;
+		}
+		fileNames.close();
+		fileScores.close();
+	}
+}
+
 bool Game::selfEating()
 {
 	for (int i = 1; i < snake.size(); i++)
@@ -217,6 +288,29 @@ bool Game::foodEating(Food food1, Food food2, Food food3)
 		return true;
 	if (snake.front().getX() == food3.getX() && snake.front().getY() == food3.getY())
 		return true;
+	return false;
+}
+
+bool Game::isQualifiedToHS()
+{
+	fstream file;
+	double score;
+	file.open("HighScoresPoints.txt", ios::in);
+	if (file.good())
+	{
+		vector<double> scores;
+		while(!file.eof())
+		{
+			file >> score;
+			scores.push_back(score);
+		}
+		for (int i = 0; i < scores.size(); i++)
+			if ((double)points > scores[i])
+				return true;
+		return false;
+	}
+	else
+		cout << "Nie udalo sie otworzyc pliku z najwyzszymi wynikami." << endl;
 	return false;
 }
 

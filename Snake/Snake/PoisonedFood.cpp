@@ -13,7 +13,7 @@ PoisonedFood::~PoisonedFood()
 {
 }
 
-void PoisonedFood::eatingFood(std::vector<Snake>& snake, int& points)
+void PoisonedFood::eatingFood(std::vector<Snake>& snake,unsigned long int& points)
 {
 	if(snake.size() > 1)
 		snake.pop_back();
